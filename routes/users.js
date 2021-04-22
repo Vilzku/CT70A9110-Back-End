@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
+
 
 // Get all
 router.get('/', async (req, res) => {
@@ -12,16 +14,19 @@ router.get('/', async (req, res) => {
     }
 });
 
+
 // Get one
 router.get('/:username', getUser, (req, res) => {
     res.json(res.user);
 });
 
+
 // Create
 router.post('/', async (req, res) => {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
         username: req.body.username,
-        password: req.body.password
+        password: hashedPassword
     });
     try {
         const newUser = await user.save();
@@ -31,10 +36,14 @@ router.post('/', async (req, res) => {
     }
 });
 
+
 // Update
 router.patch('/:username', getUser, async (req, res) => {
     if(req.body.username) res.user.username = req.body.username;
-    if(req.body.password) res.user.password = req.body.password;
+    if(req.body.password) {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        res.user.password = hashedPassword;
+    }
     try {
         const updatedUser = await res.user.save();
         res.json(updatedUser);
@@ -42,6 +51,7 @@ router.patch('/:username', getUser, async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 });
+
 
 // Delete
 router.delete('/:username', getUser, async (req, res) => {
@@ -53,6 +63,27 @@ router.delete('/:username', getUser, async (req, res) => {
     }
 });
 
+
+router.post('/login', async (req, res) => {
+    const user = await User.findOne({ username: req.body.username });
+    if(!user) {
+        return res.status(400).json(
+            { message: "Cannot find user " + user.username }
+        );
+    }
+    try {
+        if(await bcrypt.compare(req.body.password, user.password)) {
+            res.send("Success")
+        } else {
+            res.send("Nope")
+        }
+    } catch (err) {
+        res.status(500).send({ message: err.message });
+    }
+});
+
+
+// Find user by username
 async function getUser(req, res, next) {
     let user;
     try {
@@ -70,5 +101,6 @@ async function getUser(req, res, next) {
     res.user = user;
     next();
 }
+
 
 module.exports = router;
