@@ -38,9 +38,9 @@ router.post('/login', async (req, res) => {
     }
     try {
         if(await bcrypt.compare(req.body.password, user.password)) {
-            res.send("Success")
+            res.json({ username: user.username, token: "aaa" });
         } else {
-            res.send("Nope")
+            res.status(401).json({ message: "Access denied" });
         }
     } catch (err) {
         res.status(500).send({ message: err.message });

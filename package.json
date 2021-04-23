@@ -1,10 +1,12 @@
 {
-  "name": "CT70A9110-Back-End",
+  "name": "Memegallery",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "server": "nodemon server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently --kill-others-on-fail \"nodemon server.js\" \"cd client && npm start\""
   },
   "repository": {
     "type": "git",
@@ -18,12 +20,14 @@
   },
   "homepage": "https://github.com/Vilzku/CT70A9110-Back-End#readme",
   "devDependencies": {
+    "concurrently": "^6.0.2",
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.7"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "express": "^4.17.1",
-    "mongoose": "^5.12.5"
+    "mongoose": "^5.12.5",
+    "multer": "^2.0.0-rc.1"
   }
 }
