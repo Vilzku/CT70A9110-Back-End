@@ -15,6 +15,7 @@ db.once('open', () => console.log("Database connected"));
 // Start server
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use('/users', require('./routes/users'));
 app.use(express.static('public'));
 app.listen(PORT, () => console.log("Server started on port " + PORT));

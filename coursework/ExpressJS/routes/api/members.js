@@ -23,6 +23,7 @@ router.get('/:id', (req, res) => {
 
 // Create member
 router.post('/', (req, res) => {
+    console.log(req)
     const newMember = {
         id: uuid.v4(),
         name: req.body.name,
