@@ -1,18 +1,9 @@
-POST http://localhost:5000/users
+POST http://localhost:5000/users/register
 Content-Type: application/json
 
 {
     "username": "ville",
     "password": "salasana"
-}
-
-###
-
-PATCH http://localhost:5000/users/vilzku
-Content-Type: application/json
-
-{
-    "username": "ville"
 }
 
 ###
@@ -28,3 +19,7 @@ Content-Type: application/json
     "username": "ville",
     "password": "salasana"
 }
+
+###
+
+GET http://localhost:5000/users/

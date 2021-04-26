@@ -1,24 +1,37 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const token = require('../token');
 const User = require('../models/user');
 
 
+// Get all users
+router.get('/', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
+// Update user
 router.patch('/:username', getUser, async (req, res) => {
-    if(req.body.username) res.user.username = req.body.username;
     if(req.body.password) {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         res.user.password = hashedPassword;
     }
     try {
         const updatedUser = await res.user.save();
-        res.json(updatedUser);
+        res.send({ msg: "success" });
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
 });
 
 
+// Remove user
 router.delete('/:username', getUser, async (req, res) => {
     try {
         await res.user.remove();
@@ -29,6 +42,7 @@ router.delete('/:username', getUser, async (req, res) => {
 });
 
 
+// Login user
 router.post('/login', async (req, res) => {
     const user = await User.findOne({ username: req.body.username });
     if(!user) {
@@ -38,7 +52,11 @@ router.post('/login', async (req, res) => {
     }
     try {
         if(await bcrypt.compare(req.body.password, user.password)) {
-            res.json({ username: user.username, token: "aaa" });
+            const tk = token.generate();
+            user.token = tk.key;
+            user.tokenExpiration = tk.expiration;
+            await user.save();
+            res.json({ username: user.username, token: user.token });
         } else {
             res.status(401).json({ message: "Access denied" });
         }
@@ -48,11 +66,13 @@ router.post('/login', async (req, res) => {
 });
 
 
+// Register user
 router.post('/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
         username: req.body.username,
-        password: hashedPassword
+        password: hashedPassword,
+        token: token.generate().key
     });
     try {
         const newUser = await user.save();
@@ -63,6 +83,7 @@ router.post('/register', async (req, res) => {
 });
 
 
+// Find user
 async function getUser(req, res, next) {
     let user;
     try {

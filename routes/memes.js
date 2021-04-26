@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const token = require('../token');
 
 const multer = require('multer');
 const path = require('path');
@@ -10,7 +11,7 @@ const pipeline = promisify(require('stream').pipeline);
 
 
 const upload = multer();
-router.post('/upload', upload.single('meme'), async (req, res, next) => {
+router.post('/upload', upload.single('meme'), token.check, async (req, res) => {
 
     const {
         file,

@@ -14,6 +14,16 @@ const userSchema = new mongoose.Schema({
         type: Date,
         required: true,
         default: Date.now
+    },
+    token: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    tokenExpiration: {
+        type: Date,
+        required: true,
+        default: Date.now
     }
 });
 
