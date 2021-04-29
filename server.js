@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 5000;
 
 
 // MongoDB
-mongoose.connect(process.env.DATABASE_URL,
+mongoose.connect("mongodb://localhost/db",
     { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true });
 const db = mongoose.connection;
 db.on('error', (error) => console.error(error));

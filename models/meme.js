@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const memeSchema = new mongoose.Schema({
     filename: {
         type: String,
         required: true
     },
-    userid: {
+    title: {
+        type: String,
+        required: true
+    },
+    username: {
         type: String,
         required: true
     },
