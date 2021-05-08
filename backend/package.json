@@ -1,12 +1,10 @@
 {
-  "name": "Memegallery",
+  "name": "Memegallery-backend",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server": "cd backend && npm start",
-    "client": "cd frontend && npm start",
-    "dev": "concurrently --kill-others-on-fail \"nodemon server.js\" \"cd client && npm start\""
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",

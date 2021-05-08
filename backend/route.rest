@@ -33,3 +33,11 @@ GET http://localhost:5000/memes/
 ###
 
 DELETE http://localhost:5000/memes/deleteall
+
+###
+
+GET http://localhost:5000/memes/file/b85f515b17c61c4c.jpg
+
+###
+
+GET http://localhost:5000/memes/random
