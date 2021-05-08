@@ -56,7 +56,6 @@ footer p:hover {
   width: 60%;
   background: var(--primary-color);
   max-width: 500px;
-  border-radius: 4px;
 }
 
 .Login TextField {
@@ -110,6 +109,16 @@ footer p:hover {
   gap: 1rem;
 }
 
+.Upload .container {
+  display: grid;
+  gap: 1.2rem;
+  height: 100px;
+}
+
 .Upload h2 {
   margin: 0;
+}
+
+.Upload p {
+  text-align: center;
 }

@@ -17,6 +17,8 @@ export default function Display() {
         throw memeInfo.message;
       }
     } catch (err) {
+      setMeme();
+      setSrc();
       return console.log(err);
     }
 
@@ -29,8 +31,9 @@ export default function Display() {
       await setSrc(URL.createObjectURL(blob));
       setMeme(memeInfo);
     } catch (err) {
+      setMeme();
+      setSrc();
       console.log(err);
-      setMeme(null);
     }
   }
 
@@ -41,7 +44,7 @@ export default function Display() {
   return (
     <div class="Display">
       <div className="meme-container">
-        <h1>{meme ? meme.title : "Failed to load meme - Try again"}</h1>
+        <h1>{meme ? meme.title : "Failed to load meme, try again"}</h1>
         <p>
           {meme
             ? "Uploaded on " +
@@ -51,7 +54,7 @@ export default function Display() {
             : ""}
         </p>
         <div class="img-container">
-          <img class="meme" src={src} alt="" />
+          <img class="meme" src={src} alt=" " />
         </div>
         <div className="toolbar flex-center">
           <Button
