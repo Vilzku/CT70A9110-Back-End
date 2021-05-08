@@ -1,5 +1,6 @@
 :root {
   --primary-color: #eeeeee;
+  --primary-color-dark: #c2c2c2;
   --background-color: #222831;
   --accent-color: #00adb5;
 }
@@ -32,7 +33,7 @@ footer {
   width: 500px;
   justify-content: space-between;
   padding: 0 2rem;
-  color: #fff;
+  background-color: #c2c2c2;
 }
 
 footer p {
@@ -42,7 +43,7 @@ footer p {
 
 footer p:hover {
   cursor: pointer;
-  border-bottom: #fff solid 1px;
+  border-bottom: black solid 1px;
 }
 
 /* LOGIN */
@@ -51,9 +52,11 @@ footer p:hover {
   display: grid;
   gap: 1rem;
   padding: 2rem;
+  margin-bottom: 8rem;
   width: 60%;
   background: var(--primary-color);
   max-width: 500px;
+  border-radius: 4px;
 }
 
 .Login TextField {
@@ -71,20 +74,24 @@ footer p:hover {
 }
 
 .Display .meme-container {
-  padding: 2rem;
+  padding: 1rem 2rem;
   background-color: var(--primary-color);
 }
 
 .Display .meme-container h1 {
   width: 500px;
-  margin-top: 0;
+  margin: 0;
   white-space: nowrap;
+}
+
+.Display .meme-container p {
+  margin: 0 0 1rem 0;
 }
 
 .Display .img-container {
   max-width: 500px;
   height: 500px;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 .Display .meme {

@@ -11,10 +11,10 @@ function App() {
   });
 
   // Load login page if user is not logged in
-  if (!user.token) {
+  if (!user?.token) {
     return <Login setUser={setUser} />;
   } else {
-    return <Main user={user} />;
+    return <Main user={user} setUser={setUser} />;
   }
 }
 

@@ -39,10 +39,10 @@ function Upload(props) {
       <TextField
         id="outlined-basic"
         name="meme_title"
-        label="Title (max 25 characters)"
+        label="Title (max 20 characters)"
         value={memeTitle}
         autoComplete="off"
-        inputProps={{ maxLength: 25 }}
+        inputProps={{ maxLength: 20 }}
         onChange={onMemeTitleChange}
       />
       <input type="file" name="meme" onChange={onMemeChange} />

@@ -15,6 +15,9 @@ function Main(props) {
   function setSettings() {
     setScreen(3);
   }
+  function logOut() {
+    props.setUser(null);
+  }
 
   return (
     <div className="Main flex-center absolute-center">
@@ -24,7 +27,8 @@ function Main(props) {
       <footer>
         <p onClick={setDisplay}>Look at memes</p>
         <p onClick={setUpload}>Upload a meme</p>
-        <p onClick={setSettings}>Settings</p>
+        <p onClick={setSettings}>Profile</p>
+        <p onClick={logOut}>Logout</p>
       </footer>
     </div>
   );

@@ -16,7 +16,6 @@ export default function Display() {
       if (memeInfo.message) {
         throw memeInfo.message;
       }
-      setMeme(memeInfo);
     } catch (err) {
       return console.log(err);
     }
@@ -27,7 +26,8 @@ export default function Display() {
         method: "GET",
       });
       const blob = await fileRes.blob();
-      setSrc(URL.createObjectURL(blob));
+      await setSrc(URL.createObjectURL(blob));
+      setMeme(memeInfo);
     } catch (err) {
       console.log(err);
       setMeme(null);
@@ -44,7 +44,7 @@ export default function Display() {
         <h1>{meme ? meme.title : "Failed to load meme - Try again"}</h1>
         <p>
           {meme
-            ? "Uploaded at " +
+            ? "Uploaded on " +
               meme.uploadDate.substring(0, 10) +
               " by " +
               meme.username
@@ -53,14 +53,16 @@ export default function Display() {
         <div class="img-container">
           <img class="meme" src={src} alt="" />
         </div>
-        <Button
-          className="random-button"
-          variant="contained"
-          color="primary"
-          onClick={getRandomMeme}
-        >
-          Next Meme
-        </Button>
+        <div className="toolbar flex-center">
+          <Button
+            className="random-button"
+            variant="contained"
+            color="primary"
+            onClick={getRandomMeme}
+          >
+            Next Meme
+          </Button>
+        </div>
       </div>
     </div>
   );
