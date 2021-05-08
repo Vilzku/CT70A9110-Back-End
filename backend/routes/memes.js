@@ -18,8 +18,12 @@ router.post("/upload", upload.single("meme"), token.check, async (req, res) => {
   } = req;
 
   // Check if file extension is allowed
-  if (!isFileAllowed(file)) {
-    return res.status(500).json({ message: "Invalid file type" });
+  try {
+    if (!isFileAllowed(file)) {
+      return res.status(400).json({ message: "Invalid file type" });
+    }
+  } catch (err) {
+    return res.status(400).send({ message: err.message });
   }
 
   // Create database entry
@@ -59,11 +63,11 @@ router.get("/", async (req, res) => {
 // Get one meme (info)
 router.get("/:filename", async (req, res) => {
   let filename = req.params.filename;
-  if (filename === "random") {
-    const random = await Meme.aggregate([{ $sample: { size: 1 } }]);
-    filename = random[0].filename;
-  }
   try {
+    if (filename === "random") {
+      const random = await Meme.aggregate([{ $sample: { size: 1 } }]);
+      filename = random[0].filename;
+    }
     const meme = await Meme.findOne({ filename });
     res.json(meme);
   } catch (err) {

@@ -40,9 +40,9 @@ function Login(props) {
   }
 
   return (
-    <div class="Login flex-center">
+    <div class="Login flex-center absolute-center">
       <form class="input-box">
-        {loginState == 0 ? (
+        {loginState === 0 ? (
           <TextField
             id="outlined-basic"
             name="username"
@@ -60,7 +60,7 @@ function Login(props) {
             error
           />
         )}
-        {loginState == 0 ? (
+        {loginState === 0 ? (
           <TextField
             id="outlined-basic"
             name="password"
@@ -80,8 +80,12 @@ function Login(props) {
             error
           />
         )}
-
-        <Button class="login-button" onClick={loginUser}>
+        <Button
+          className="login-button"
+          variant="contained"
+          color="primary"
+          onClick={loginUser}
+        >
           Login
         </Button>
       </form>

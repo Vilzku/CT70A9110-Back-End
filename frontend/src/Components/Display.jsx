@@ -6,19 +6,31 @@ export default function Display() {
   const [src, setSrc] = useState(null);
 
   async function getRandomMeme() {
-    const infoRes = await fetch("/memes/random", {
-      method: "GET",
-    });
-    setMeme(await infoRes.json());
-
+    // Fetch meme info
+    let memeInfo;
     try {
-      const fileRes = await fetch("/memes/file/" + meme.filename, {
+      const infoRes = await fetch("/memes/random", {
+        method: "GET",
+      });
+      memeInfo = await infoRes.json();
+      if (memeInfo.message) {
+        throw memeInfo.message;
+      }
+      setMeme(memeInfo);
+    } catch (err) {
+      return console.log(err);
+    }
+
+    // Fetch file
+    try {
+      const fileRes = await fetch("/memes/file/" + memeInfo.filename, {
         method: "GET",
       });
       const blob = await fileRes.blob();
       setSrc(URL.createObjectURL(blob));
     } catch (err) {
-      console.log("Failed to load image");
+      console.log(err);
+      setMeme(null);
     }
   }
 
@@ -29,12 +41,25 @@ export default function Display() {
   return (
     <div class="Display">
       <div className="meme-container">
-        <h1>Title here</h1>
+        <h1>{meme ? meme.title : "Failed to load meme - Try again"}</h1>
+        <p>
+          {meme
+            ? "Uploaded at " +
+              meme.uploadDate.substring(0, 10) +
+              " by " +
+              meme.username
+            : ""}
+        </p>
         <div class="img-container">
-          <img class="meme" src={src} />
+          <img class="meme" src={src} alt="" />
         </div>
-        <Button class="random-button" onClick={getRandomMeme}>
-          Random Meme
+        <Button
+          className="random-button"
+          variant="contained"
+          color="primary"
+          onClick={getRandomMeme}
+        >
+          Next Meme
         </Button>
       </div>
     </div>

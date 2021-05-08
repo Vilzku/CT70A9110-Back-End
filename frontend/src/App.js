@@ -4,8 +4,6 @@ import "./index.css";
 import Login from "./Components/Login";
 import Main from "./Components/Main";
 
-import Container from "@material-ui/core/Container";
-
 function App() {
   const [user, setUser] = useState({
     username: "",
@@ -14,17 +12,9 @@ function App() {
 
   // Load login page if user is not logged in
   if (!user.token) {
-    return (
-      <Container>
-        <Login setUser={setUser} />
-      </Container>
-    );
+    return <Login setUser={setUser} />;
   } else {
-    return (
-      <Container>
-        <Main user={user} />
-      </Container>
-    );
+    return <Main user={user} />;
   }
 }
 

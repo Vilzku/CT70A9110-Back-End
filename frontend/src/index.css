@@ -4,17 +4,45 @@
   --accent-color: #00adb5;
 }
 
+* {
+  overflow: hidden;
+}
+
 html {
   background-color: var(--background-color);
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 .flex-center {
   display: flex;
   flex-direction: column;
-  height: 100vh;
   width: 100%;
   justify-content: center;
   align-items: center;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+footer {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+  padding: 0 2rem;
+  color: #fff;
+}
+
+footer p {
+  transition: opacity 0.3s ease;
+  padding-bottom: 4px;
+}
+
+footer p:hover {
+  cursor: pointer;
+  border-bottom: #fff solid 1px;
 }
 
 /* LOGIN */
@@ -33,8 +61,7 @@ html {
 }
 
 .Login .login-button {
-  height: 2rem;
-  margin-top: 1rem;
+  width: 100%;
 }
 
 /* DISPLAY */
@@ -51,13 +78,13 @@ html {
 .Display .meme-container h1 {
   width: 500px;
   margin-top: 0;
-  word-wrap: break-word;
+  white-space: nowrap;
 }
 
 .Display .img-container {
-  width: 500px;
+  max-width: 500px;
   height: 500px;
-  border: solid 1px black;
+  margin-bottom: 1rem;
 }
 
 .Display .meme {
@@ -66,12 +93,16 @@ html {
   object-fit: contain;
 }
 
-.Display .random-button {
-  margin: 0 auto;
-}
-
 /* UPLOAD */
 
 .Upload {
-  height: 200px;
+  width: 500px;
+  padding: 2rem;
+  background-color: var(--primary-color);
+  display: grid;
+  gap: 1rem;
+}
+
+.Upload h2 {
+  margin: 0;
 }
