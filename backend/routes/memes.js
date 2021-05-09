@@ -9,7 +9,7 @@ const { promisify } = require("util");
 const pipeline = promisify(require("stream").pipeline);
 const Meme = require("../models/meme");
 
-// Upload meme
+// Upload meme - requires username and token
 const upload = multer();
 router.post("/upload", upload.single("meme"), token.check, async (req, res) => {
   const {
@@ -50,10 +50,10 @@ router.post("/upload", upload.single("meme"), token.check, async (req, res) => {
   res.json({ message: "Meme successfully uploaded" });
 });
 
-// Get all memes
-router.get("/", async (req, res) => {
+// Get all memes matching username - requires username and token
+router.post("/user/:username", token.check, async (req, res) => {
   try {
-    const memes = await Meme.find();
+    const memes = await Meme.find({ username: req.params.username });
     res.json(memes);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -85,11 +85,18 @@ router.get("/file/:filename", async (req, res) => {
   }
 });
 
-// Delete all memes from database -- for testing
-router.delete("/deleteall", async (req, res) => {
+// Delete a meme - requires username and token
+router.post("/delete/:filename", token.check, async (req, res) => {
+  const meme = Meme.find({ filename: req.params.filename });
+  if (meme.username !== req.body.username)
+    return res.status(400).json({ message: "Not allowed" });
   try {
-    await Meme.remove();
-    res.json({ message: "All memes deleted from database" });
+    await Meme.deleteOne({ filename: req.params.filename });
+    const root = path.join(__dirname, "..", "user_memes", req.params.filename);
+    fs.unlink(root, (err) => {
+      throw err;
+    });
+    res.json({ message: "Meme deleted from database" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

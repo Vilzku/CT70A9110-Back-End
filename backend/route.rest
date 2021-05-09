@@ -24,15 +24,27 @@ Content-Type: application/json
 
 GET http://localhost:5000/users/
 
+###
+
+PATCH http://localhost:5000/users/ville
+Content-Type: application/json
+
+{
+    "username": "ville",
+    "password": "123",
+    "newPassword": "salasana"
+}
 
 ###########################################################
 
 
-GET http://localhost:5000/memes/
+POST http://localhost:5000/memes/delete/46d1a2231d616716.jpg
+Content-Type: application/json
 
-###
-
-DELETE http://localhost:5000/memes/deleteall
+{
+    "username": "ville",
+    "token": "5deaa0b10bc8b917ab06840bdb660a79abca98347fc27470185413b7a5723b7f"
+}
 
 ###
 
@@ -41,3 +53,13 @@ GET http://localhost:5000/memes/file/b85f515b17c61c4c.jpg
 ###
 
 GET http://localhost:5000/memes/random
+
+###
+
+POST http://localhost:5000/memes/user/ville
+Content-Type: application/json
+
+{
+    "username": "ville",
+    "token": "5deaa0b10bc8b917ab06840bdb660a79abca98347fc27470185413b7a5723b7f"
+}

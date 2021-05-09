@@ -10,7 +10,7 @@ function Login(props) {
 
   const [loginState, setLoginState] = useState(0);
   // 0 = Nothing; 1 = Logging in;
-  // -1 = Wrong pass; -2 = Wrong user;s
+  // -1 = Wrong pass; -2 = Wrong user;
 
   function onUsernameChange(e) {
     setLoginDetails({
@@ -37,6 +37,10 @@ function Login(props) {
     if (res.status !== 200) return setLoginState(-3);
     const user = await res.json();
     props.setUser(user);
+  }
+
+  function onRegisterClick() {
+    props.setUser({ username: "", token: "register" });
   }
 
   return (
@@ -88,6 +92,12 @@ function Login(props) {
         >
           Login
         </Button>
+        <p className="register-text">
+          Not registered yet?{" "}
+          <span className="text-link" onClick={onRegisterClick}>
+            Register here
+          </span>
+        </p>
       </form>
     </div>
   );

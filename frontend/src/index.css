@@ -2,7 +2,8 @@
   --primary-color: #eeeeee;
   --primary-color-dark: #c2c2c2;
   --background-color: #222831;
-  --accent-color: #00adb5;
+  --accent-color: #3f51b5;
+  --accent-color-dark: #303f9f;
 }
 
 * {
@@ -28,6 +29,15 @@ html {
   transform: translateY(-50%);
 }
 
+.text-link {
+  color: var(--accent-color);
+}
+
+.text-link {
+  cursor: pointer;
+  color: var(--accent-color-dark);
+}
+
 footer {
   display: flex;
   width: 500px;
@@ -44,6 +54,11 @@ footer p {
 footer p:hover {
   cursor: pointer;
   border-bottom: black solid 1px;
+}
+
+.cancel-text {
+  text-align: center;
+  margin: 4px;
 }
 
 /* LOGIN */
@@ -64,6 +79,10 @@ footer p:hover {
 
 .Login .login-button {
   width: 100%;
+}
+
+.Login .register-text {
+  text-align: center;
 }
 
 /* DISPLAY */
@@ -99,6 +118,11 @@ footer p:hover {
   object-fit: contain;
 }
 
+.Display .toolbar {
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 /* UPLOAD */
 
 .Upload {
@@ -121,4 +145,43 @@ footer p:hover {
 
 .Upload p {
   text-align: center;
+}
+
+/* PROFILE */
+
+.Profile {
+  flex-direction: column;
+  padding: 1rem 2rem;
+  background-color: var(--primary-color);
+  height: 80vh;
+}
+
+.Profile .profile-container .memes {
+  height: 150px;
+  overflow-y: auto;
+}
+
+.Profile .meme-item:hover {
+  cursor: pointer;
+  color: var(--accent-color);
+}
+
+.PasswordChange {
+  width: 500px;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.PasswordChange h1,
+.PasswordChange p {
+  margin: 0;
+  padding: 0;
+}
+
+.PasswordChange .password-button {
+  margin-top: 1rem;
+}
+
+.DeleteUser .delete-user-button {
+  margin-left: 1rem;
 }
