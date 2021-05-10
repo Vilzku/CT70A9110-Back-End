@@ -2,11 +2,11 @@
 
 Meme Gallery is an application that users can upload pictures (memes) and then view randomly selected memes that others have uploaded. The back-end is done with NodeJS and Express, while the front-end is handled with React. Front-end communicates with the back-end via REST api. All data is saved in a MongoDB Atlas cluster and uploaded image files are stored locally.
 
-The main objective of this project was to create a functional back-end and therefore the front-end is not fully finalized and even has some (critical) bugs. Due to time limitations I am not able to fix these problems, but otherwise I would.
+The main objective of this project was to create a functional back-end and therefore the front-end is not fully finalized and even has some (critical) bugs. Due to time limitations I am not able to fix these problems, but otherwise I would. There are a few main features I wan't to point out: The connection between the client and server is made secure by token authentication. Whenever a user logins on the page, he or she is given token that matches the entry inside the database. Most of the actions the server handles require the user to provide a token that is checked from the database. Each token is valid for 1 hour. Another security feature is encrypting passwords with salt and nothing is never saved in a plain text.
 
 ## How to run
 
-When running the project first time both back-end and front-end need to get node packages installed. This can be done by executing the following command in the respective directories.
+When running the project first time **both back-end and front-end** modules need to get node packages installed. This can be done by executing the following command in the respective directories.
 ```
 npm install
 ```
