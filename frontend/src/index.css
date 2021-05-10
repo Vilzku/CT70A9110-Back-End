@@ -156,9 +156,16 @@ footer p:hover {
   height: 80vh;
 }
 
+.Profile .profile-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
 .Profile .profile-container .memes {
   height: 150px;
   overflow-y: auto;
+  flex: 1;
 }
 
 .Profile .meme-item:hover {
