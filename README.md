@@ -6,6 +6,8 @@ The main objective of this project was to create a functional back-end and there
 
 ## How to run
 
+This video shows how to run the project and the main functionalities **https://youtu.be/INNc2jNpRrI**
+
 When running the project first time **both back-end and front-end** modules need to get node packages installed. This can be done by executing the following command in the respective directories.
 ```
 npm install
