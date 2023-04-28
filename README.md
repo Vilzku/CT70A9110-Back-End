@@ -8,8 +8,6 @@ In short, the front-end application makes bunch of requests to the REST server w
 
 ## How to run
 
-This video shows how to run the project and the main functionalities **https://youtu.be/INNc2jNpRrI**
-
 There is some testing data included in the repository and MongoDB Atlas -database and the corresponding files (memes) are included in this repository.
 
 When running the project first time both back-end and front-end modules need to get node packages installed. This can be done by executing the following command in the **respective directories**.
